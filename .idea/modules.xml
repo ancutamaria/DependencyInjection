@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/DepenencyInjection.iml" filepath="$PROJECT_DIR$/.idea/modules/DepenencyInjection.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/DepenencyInjection.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/DepenencyInjection.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/DependencyInjection.iml" filepath="$PROJECT_DIR$/.idea/modules/DependencyInjection.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/DependencyInjection.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/DependencyInjection.app.iml" />
     </modules>
   </component>
 </project>
