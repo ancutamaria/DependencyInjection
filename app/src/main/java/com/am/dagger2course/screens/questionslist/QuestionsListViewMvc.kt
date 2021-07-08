@@ -1,25 +1,26 @@
 package com.am.dagger2course.screens.questionslist
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.annotation.IdRes
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.am.dagger2course.R
 import com.am.dagger2course.questions.Question
+import com.am.dagger2course.screens.common.viewsmvc.BaseViewMvc
 import java.util.*
-import kotlin.collections.HashSet
-import kotlin.collections.List
 
 // encapsulates UI logic
 
 class QuestionsListViewMvc (
         layoutInflater: LayoutInflater,
         parent: ViewGroup?
+): BaseViewMvc<QuestionsListViewMvc.Listener>(
+        layoutInflater,
+        parent,
+        R.layout.layout_questions_list
 ){
 
     interface Listener {
@@ -30,13 +31,6 @@ class QuestionsListViewMvc (
     private val swipeRefresh: SwipeRefreshLayout
     private val recyclerView: RecyclerView
     private val questionsAdapter: QuestionsAdapter
-
-    val rootView: View = layoutInflater.inflate(R.layout.layout_questions_list, parent, false)
-
-    private val context: Context
-        get() = rootView.context
-
-    private val listeners = HashSet<Listener>()
 
     init {
 
@@ -60,17 +54,6 @@ class QuestionsListViewMvc (
 
     }
 
-    fun registerListener(listener: Listener) {
-        listeners.add(listener)
-    }
-
-    fun unregisterListener(listener: Listener) {
-        listeners.remove(listener)
-    }
-
-    private fun <T: View?> findViewById(@IdRes id: Int): T {
-        return rootView.findViewById<T>(id)
-    }
 
     fun bindQuestions(questions: List<Question>) {
         questionsAdapter.bindData(questions)

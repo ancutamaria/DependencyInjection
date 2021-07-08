@@ -1,20 +1,22 @@
 package com.am.dagger2course.screens.questiondetails
 
-import android.content.Context
 import android.os.Build
 import android.text.Html
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.annotation.IdRes
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.am.dagger2course.R
 import com.am.dagger2course.screens.common.toolbar.MyToolbar
+import com.am.dagger2course.screens.common.viewsmvc.BaseViewMvc
 
 class QuestionDetailsViewMvc(
         layoutInflater: LayoutInflater,
         parent: ViewGroup?
+):BaseViewMvc<QuestionDetailsViewMvc.Listener>(
+        layoutInflater,
+        parent,
+        R.layout.layout_question_details
 ) {
 
     interface Listener {
@@ -24,13 +26,6 @@ class QuestionDetailsViewMvc(
     private val toolbar: MyToolbar
     private val swipeRefresh: SwipeRefreshLayout
     private val txtQuestionBody: TextView
-
-    val rootView: View = layoutInflater.inflate(R.layout.layout_question_details, parent, false)
-
-    private val context: Context
-        get() = rootView.context
-
-    private val listeners = HashSet<Listener>()
 
     init {
 
@@ -47,18 +42,6 @@ class QuestionDetailsViewMvc(
         // init pull-down-to-refresh (used as a progress indicator)
         swipeRefresh = findViewById(R.id.swipeRefresh)
         swipeRefresh.isEnabled = false
-    }
-
-    fun registerListener(listener: Listener) {
-        listeners.add(listener)
-    }
-
-    fun unregisterListener(listener: Listener) {
-        listeners.remove(listener)
-    }
-
-    private fun <T: View?> findViewById(@IdRes id: Int): T {
-        return rootView.findViewById<T>(id)
     }
 
     fun bindQuestionWithBody(questionBody: String) {
