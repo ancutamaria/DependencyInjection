@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.IdRes
 import androidx.annotation.LayoutRes
-import com.am.dagger2course.R
 
 open class BaseViewMvc<LISTENER_TYPE>(
         private val layoutInflater: LayoutInflater,
