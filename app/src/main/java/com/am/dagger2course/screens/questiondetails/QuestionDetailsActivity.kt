@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.am.dagger2course.MyApplication
 import com.am.dagger2course.R
 import com.am.dagger2course.questions.FetchQuestionDetailsUseCase
 import com.am.dagger2course.screens.common.ScreensNavigator
@@ -34,7 +35,7 @@ class QuestionDetailsActivity : AppCompatActivity(), QuestionDetailsViewMvc.List
         super.onCreate(savedInstanceState)
 
         viewMvc = QuestionDetailsViewMvc(LayoutInflater.from(this), null)
-        fetchQuestionDetailsUseCase = FetchQuestionDetailsUseCase()
+        fetchQuestionDetailsUseCase = FetchQuestionDetailsUseCase((application as MyApplication).retrofit)
         dialogsNavigator = DialogsNavigator(supportFragmentManager)
         screensNavigator = ScreensNavigator(this)
 
