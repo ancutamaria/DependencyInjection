@@ -8,6 +8,7 @@ import kotlinx.coroutines.withContext
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+/* MVC - Model */
 class FetchQuestionDetailsUseCase {
 
     // init retrofit

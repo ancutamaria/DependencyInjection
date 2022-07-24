@@ -13,7 +13,7 @@ import com.am.dagger2course.screens.common.viewsmvc.BaseViewMvc
 import java.util.*
 
 // encapsulates UI logic
-
+/* MVC - View */
 class QuestionsListViewMvc (
         layoutInflater: LayoutInflater,
         parent: ViewGroup?

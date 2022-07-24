@@ -14,6 +14,7 @@ import com.am.dagger2course.screens.common.dialogs.DialogsNavigator
 import com.am.dagger2course.screens.common.toolbar.MyToolbar
 import kotlinx.coroutines.*
 
+/* MVC - Controller */
 class QuestionDetailsActivity : AppCompatActivity(), QuestionDetailsViewMvc.Listener {
 
     private val coroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)

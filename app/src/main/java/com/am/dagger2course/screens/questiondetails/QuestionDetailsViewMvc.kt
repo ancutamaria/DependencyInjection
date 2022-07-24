@@ -10,6 +10,7 @@ import com.am.dagger2course.R
 import com.am.dagger2course.screens.common.toolbar.MyToolbar
 import com.am.dagger2course.screens.common.viewsmvc.BaseViewMvc
 
+/* MVC - View */
 class QuestionDetailsViewMvc(
         layoutInflater: LayoutInflater,
         parent: ViewGroup?
