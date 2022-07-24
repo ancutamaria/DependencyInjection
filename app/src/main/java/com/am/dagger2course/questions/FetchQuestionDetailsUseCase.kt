@@ -8,7 +8,7 @@ import kotlinx.coroutines.withContext
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class FetchQuestionsUseCase {
+class FetchQuestionDetailsUseCase {
 
     // init retrofit
     private val retrofit = Retrofit.Builder()
@@ -16,14 +16,14 @@ class FetchQuestionsUseCase {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
-    val stackoverflowApi: StackoverflowApi = retrofit.create(StackoverflowApi::class.java)
+    private val stackoverflowApi = retrofit.create(StackoverflowApi::class.java)
 
-    suspend fun fetchLatestQuestions(): Result {
+    suspend fun fetchQuestionDetails(questionId: String): Result {
         return withContext(Dispatchers.IO) {
             try {
-                val response = stackoverflowApi.lastActiveQuestions(20)
+                val response = stackoverflowApi.questionDetails(questionId)
                 if (response.isSuccessful && response.body() != null) {
-                    return@withContext Result.Success(response.body()!!.questions)
+                    return@withContext Result.Success(response.body().toString())
                 } else {
                     return@withContext Result.Failure
                 }
@@ -36,5 +36,4 @@ class FetchQuestionsUseCase {
             }
         }
     }
-
 }

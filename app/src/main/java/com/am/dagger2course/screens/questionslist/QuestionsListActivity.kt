@@ -3,15 +3,11 @@ package com.am.dagger2course.screens.questionslist
 import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
-import com.am.dagger2course.Constants
-import com.am.dagger2course.networking.StackoverflowApi
 import com.am.dagger2course.questions.FetchQuestionsUseCase
 import com.am.dagger2course.questions.Question
 import com.am.dagger2course.screens.common.dialogs.ServerErrorDialogFragment
 import com.am.dagger2course.screens.questiondetails.QuestionDetailsActivity
 import kotlinx.coroutines.*
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 class QuestionsListActivity : AppCompatActivity(), QuestionsListViewMvc.Listener{
 
@@ -26,10 +22,10 @@ class QuestionsListActivity : AppCompatActivity(), QuestionsListViewMvc.Listener
         super.onCreate(savedInstanceState)
 
         viewMvc = QuestionsListViewMvc(LayoutInflater.from(this), null)
+        fetchQuestionsUseCase = FetchQuestionsUseCase()
 
         setContentView(viewMvc.rootView)
 
-        fetchQuestionsUseCase = FetchQuestionsUseCase()
     }
 
     override fun onStart() {
@@ -51,11 +47,11 @@ class QuestionsListActivity : AppCompatActivity(), QuestionsListViewMvc.Listener
             viewMvc.showProgressIndication()
             try {
                 when (val result = fetchQuestionsUseCase.fetchLatestQuestions()) {
-                    is FetchQuestionsUseCase.Result.Success -> {
-                        viewMvc.bindQuestions(result.questions)
+                    is com.am.dagger2course.questions.Result.Success -> {
+                        viewMvc.bindQuestions(result.payload as List<Question>)
                         isDataLoaded = true
                     }
-                    is FetchQuestionsUseCase.Result.Failure -> onFetchFailed()
+                    is com.am.dagger2course.questions.Result.Failure -> onFetchFailed()
                 }
             } finally {
                 viewMvc.hideProgressIndication()
