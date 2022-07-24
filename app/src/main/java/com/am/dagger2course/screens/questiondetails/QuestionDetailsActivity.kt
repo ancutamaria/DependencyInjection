@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.am.dagger2course.R
 import com.am.dagger2course.questions.FetchQuestionDetailsUseCase
+import com.am.dagger2course.screens.common.dialogs.DialogsNavigator
 import com.am.dagger2course.screens.common.dialogs.ServerErrorDialogFragment
 import com.am.dagger2course.screens.common.toolbar.MyToolbar
 import kotlinx.coroutines.*
@@ -23,13 +24,16 @@ class QuestionDetailsActivity : AppCompatActivity(), QuestionDetailsViewMvc.List
 
     private lateinit var viewMvc: QuestionDetailsViewMvc
     private lateinit var fetchQuestionDetailsUseCase: FetchQuestionDetailsUseCase
+    private lateinit var dialogsNavigator: DialogsNavigator
 
     private lateinit var questionId: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         viewMvc = QuestionDetailsViewMvc(LayoutInflater.from(this), null)
         fetchQuestionDetailsUseCase = FetchQuestionDetailsUseCase()
+        dialogsNavigator = DialogsNavigator(supportFragmentManager)
 
         setContentView(viewMvc.rootView)
 
@@ -77,9 +81,7 @@ class QuestionDetailsActivity : AppCompatActivity(), QuestionDetailsViewMvc.List
     }
 
     private fun onFetchFailed() {
-        supportFragmentManager.beginTransaction()
-                .add(ServerErrorDialogFragment.newInstance(), null)
-                .commitAllowingStateLoss()
+        dialogsNavigator.showServerErrorDialog()
     }
 
     companion object {
