@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.am.dagger2course.R
 import com.am.dagger2course.questions.FetchQuestionDetailsUseCase
+import com.am.dagger2course.screens.common.ScreensNavigator
 import com.am.dagger2course.screens.common.dialogs.DialogsNavigator
 import com.am.dagger2course.screens.common.dialogs.ServerErrorDialogFragment
 import com.am.dagger2course.screens.common.toolbar.MyToolbar
@@ -25,6 +26,7 @@ class QuestionDetailsActivity : AppCompatActivity(), QuestionDetailsViewMvc.List
     private lateinit var viewMvc: QuestionDetailsViewMvc
     private lateinit var fetchQuestionDetailsUseCase: FetchQuestionDetailsUseCase
     private lateinit var dialogsNavigator: DialogsNavigator
+    private lateinit var screensNavigator: ScreensNavigator
 
     private lateinit var questionId: String
 
@@ -34,6 +36,7 @@ class QuestionDetailsActivity : AppCompatActivity(), QuestionDetailsViewMvc.List
         viewMvc = QuestionDetailsViewMvc(LayoutInflater.from(this), null)
         fetchQuestionDetailsUseCase = FetchQuestionDetailsUseCase()
         dialogsNavigator = DialogsNavigator(supportFragmentManager)
+        screensNavigator = ScreensNavigator(this)
 
         setContentView(viewMvc.rootView)
 
@@ -94,6 +97,6 @@ class QuestionDetailsActivity : AppCompatActivity(), QuestionDetailsViewMvc.List
     }
 
     override fun onBackClicked() {
-        onBackPressed()
+        screensNavigator.navigateBack()
     }
 }
