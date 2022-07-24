@@ -4,14 +4,11 @@ import com.am.dagger2course.networking.StackoverflowApi
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import retrofit2.Retrofit
 
 /* MVC - Model */
 class FetchQuestionsUseCase(
-        private val retrofit: Retrofit
+        private val stackoverflowApi: StackoverflowApi
 ) {
-
-    private val stackoverflowApi: StackoverflowApi = retrofit.create(StackoverflowApi::class.java)
 
     suspend fun fetchLatestQuestions(): Result {
         return withContext(Dispatchers.IO) {
