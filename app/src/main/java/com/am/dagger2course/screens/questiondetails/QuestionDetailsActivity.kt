@@ -11,7 +11,6 @@ import com.am.dagger2course.R
 import com.am.dagger2course.questions.FetchQuestionDetailsUseCase
 import com.am.dagger2course.screens.common.ScreensNavigator
 import com.am.dagger2course.screens.common.dialogs.DialogsNavigator
-import com.am.dagger2course.screens.common.dialogs.ServerErrorDialogFragment
 import com.am.dagger2course.screens.common.toolbar.MyToolbar
 import kotlinx.coroutines.*
 
