@@ -7,11 +7,12 @@ import com.am.dagger2course.MyApplication
 import com.am.dagger2course.questions.FetchQuestionsUseCase
 import com.am.dagger2course.questions.Question
 import com.am.dagger2course.screens.common.ScreensNavigator
+import com.am.dagger2course.screens.common.activities.BaseActivity
 import com.am.dagger2course.screens.common.dialogs.DialogsNavigator
 import kotlinx.coroutines.*
 
 /* MVC - Controller */
-class QuestionsListActivity : AppCompatActivity(), QuestionsListViewMvc.Listener{
+class QuestionsListActivity : BaseActivity(), QuestionsListViewMvc.Listener{
 
     private val coroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
 
@@ -26,7 +27,7 @@ class QuestionsListActivity : AppCompatActivity(), QuestionsListViewMvc.Listener
         super.onCreate(savedInstanceState)
 
         viewMvc = QuestionsListViewMvc(LayoutInflater.from(this), null)
-        fetchQuestionsUseCase = (application as MyApplication).fetchQuestionsUseCase
+        fetchQuestionsUseCase = compositionRoot.fetchQuestionsUseCase
         dialogsNavigator = DialogsNavigator(supportFragmentManager)
         screensNavigator = ScreensNavigator(this)
 

@@ -11,12 +11,13 @@ import com.am.dagger2course.MyApplication
 import com.am.dagger2course.R
 import com.am.dagger2course.questions.FetchQuestionDetailsUseCase
 import com.am.dagger2course.screens.common.ScreensNavigator
+import com.am.dagger2course.screens.common.activities.BaseActivity
 import com.am.dagger2course.screens.common.dialogs.DialogsNavigator
 import com.am.dagger2course.screens.common.toolbar.MyToolbar
 import kotlinx.coroutines.*
 
 /* MVC - Controller */
-class QuestionDetailsActivity : AppCompatActivity(), QuestionDetailsViewMvc.Listener {
+class QuestionDetailsActivity : BaseActivity(), QuestionDetailsViewMvc.Listener {
 
     private val coroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
 
@@ -35,7 +36,7 @@ class QuestionDetailsActivity : AppCompatActivity(), QuestionDetailsViewMvc.List
         super.onCreate(savedInstanceState)
 
         viewMvc = QuestionDetailsViewMvc(LayoutInflater.from(this), null)
-        fetchQuestionDetailsUseCase = FetchQuestionDetailsUseCase((application as MyApplication).stackoverflowApi)
+        fetchQuestionDetailsUseCase = compositionRoot.fetchQuestionDetailsUseCase
         dialogsNavigator = DialogsNavigator(supportFragmentManager)
         screensNavigator = ScreensNavigator(this)
 
