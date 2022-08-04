@@ -8,6 +8,9 @@ import com.am.dagger2course.questions.FetchQuestionsUseCase
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+/*
+Application Scope -> application lifecycle
+ */
 @UiThread
 class AppCompositionRoot {
 
@@ -18,11 +21,9 @@ class AppCompositionRoot {
                 .build()
     }
 
-    private val stackoverflowApi: StackoverflowApi by lazy {
+    val stackoverflowApi: StackoverflowApi by lazy {
         retrofit.create(StackoverflowApi::class.java)
     }
 
-    public val fetchQuestionsUseCase get() = FetchQuestionsUseCase(stackoverflowApi)
-    public val fetchQuestionDetailsUseCase get() = FetchQuestionDetailsUseCase(stackoverflowApi)
 
 }
