@@ -28,7 +28,7 @@ class QuestionsListActivity : BaseActivity(), QuestionsListViewMvc.Listener{
 
         viewMvc = QuestionsListViewMvc(LayoutInflater.from(this), null)
         fetchQuestionsUseCase = compositionRoot.fetchQuestionsUseCase
-        dialogsNavigator = DialogsNavigator(supportFragmentManager)
+        dialogsNavigator = compositionRoot.dialogsNavigator
         screensNavigator = compositionRoot.screensNavigator
 
         setContentView(viewMvc.rootView)

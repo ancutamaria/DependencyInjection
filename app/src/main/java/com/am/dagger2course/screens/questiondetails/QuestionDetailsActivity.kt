@@ -36,9 +36,10 @@ class QuestionDetailsActivity : BaseActivity(), QuestionDetailsViewMvc.Listener 
         super.onCreate(savedInstanceState)
 
         viewMvc = QuestionDetailsViewMvc(LayoutInflater.from(this), null)
+
         fetchQuestionDetailsUseCase = compositionRoot.fetchQuestionDetailsUseCase
-        dialogsNavigator = DialogsNavigator(supportFragmentManager)
-        screensNavigator = ScreensNavigator(this)
+        dialogsNavigator = compositionRoot.dialogsNavigator
+        screensNavigator = compositionRoot.screensNavigator
 
         setContentView(viewMvc.rootView)
 
