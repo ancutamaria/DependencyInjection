@@ -15,23 +15,11 @@ class ActivityCompositionRoot(
         private val appCompositionRoot: AppCompositionRoot
 ) {
 
-    /*
-    scoped to the activity
-     */
     val screensNavigator by lazy {
         ScreensNavigator(activity)
     }
 
-    private val stackoverflowApi get() = appCompositionRoot.stackoverflowApi
-    private val fragmentManager get() = activity.supportFragmentManager
-
-    /*
-    not scoped to the activity - here because there is no state that needs to be shared
-     */
-
-    val dialogsNavigator get() = DialogsNavigator(fragmentManager)
-
-    val fetchQuestionsUseCase get() = FetchQuestionsUseCase(stackoverflowApi)
-    val fetchQuestionDetailsUseCase get() = FetchQuestionDetailsUseCase(stackoverflowApi)
+    val stackoverflowApi get() = appCompositionRoot.stackoverflowApi
+    val fragmentManager get() = activity.supportFragmentManager
 
 }
